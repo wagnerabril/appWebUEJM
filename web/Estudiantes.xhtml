@@ -1,78 +1,87 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <b:row>
-            
-            <b:column style="text-align: center;width: 100%;" span="3">
-                <b:button style="margin: 2em" value="Nuevo" look="success" onclick="$('.modalPseudoClass').modal()" size="lg"/>
-            </b:column>
-        </b:row>
-        <b:form id="frmTable">
-            <b:dataTable value="#{estudiantesController.lst}"
-                         var="car">
-                <b:dataTableColumn order="desc" value="#{car.id}" />
-                <b:dataTableColumn value="#{car.numero}" />
-                <b:dataTableColumn value="#{car.cedula}" />
-                <b:dataTableColumn value="#{car.nombres}"  />
-                <b:dataTableColumn value="#{car.fechaNacimiento}"  />
-                <b:dataTableColumn value="#{car.direccion}"  />
-                <b:dataTableColumn value="#{car.telefono}"  />
-                <b:dataTableColumn value="#{car.representante}"  />
-                <b:dataTableColumn   >
-                    <f:facet name="header">
-                        Acciones
-                    </f:facet>
-                    <b:commandButton style="margin-right: 1em" look="info" value="Ver" action="#{estudiantesController.ver(car)}"  update="frmTable"/>
-                    <b:commandButton  style="margin-right: 1em" look="danger" value="Eliminar" action="#{estudiantesController.eliminar(car)}"  update="frmTable"/>
-                    <b:commandButton  style="margin-right: 1em" look="success" value="Editar" action="#{estudiantesController.showEditar(car)}"   update="frmEdit" oncomplete="$('.modalPseudoClassEdit').modal()"/>
 
-                </b:dataTableColumn>
-            </b:dataTable>
-        </b:form>
-        <b:form id="frmAdd">
-            <b:modal id="amodal" title="Nuevo Estudiante" styleClass="modalPseudoClass">
-                <b:inputText required="true" label="Numero" placeholder="Numero" value="#{estudiantesController.estudiantes.numero}" />
-                <b:inputText  label="Cedula" placeholder="Decula" value="#{estudiantesController.estudiantes.cedula}" />
-                <b:inputText required="true" label="Nombres" placeholder="Nombres" value="#{estudiantesController.estudiantes.nombres}" /> 
-                <b:inputText  type="date" label="Fecha Nacimiento" placeholder="Tutor" value="#{estudiantesController.estudiantes.fechaNacimiento}" /> 
-                <b:inputText  label="Direccion" placeholder="Direccion" value="#{estudiantesController.estudiantes.direccion}" /> 
-                <b:inputText  label="Telefono" placeholder="Telefono" value="#{estudiantesController.estudiantes.telefono}" /> 
-                <b:inputText  label="Representante" placeholder="Representante" value="#{estudiantesController.estudiantes.representante}" /> 
-                <b:inputText  label="Observaciones" placeholder="Observaciones" value="#{estudiantesController.estudiantes.observaciones}" /> 
-                <f:facet name="footer">
-                    <b:button value="Close" dismiss="modal" />
-                    <b:commandButton look="success" value="Guardar" action="#{estudiantesController.insert()}"  update="message frmTable"/>
-                    <b:growl id="message"/>
-                </f:facet>
-            </b:modal>
+    <body>
 
-        </b:form>
+        <ui:composition template="./AdminTemplate.xhtml">
 
-        <b:form id="frmEdit">
-            <b:modal id="amodal" title="Editar Estudiante" styleClass="modalPseudoClassEdit">
-                <b:inputText required="true" label="Numero" placeholder="Nombre" value="#{estudiantesController.estudiantes.numero}" />
-                <b:inputText  label="Cedula" placeholder="Descripcion" value="#{estudiantesController.estudiantes.cedula}" />
-                <b:inputText required="true"  label="Nombres" placeholder="Tutor" value="#{estudiantesController.estudiantes.nombres}" /> 
-                <b:inputText  type="date" label="Fecha Nacimiento" placeholder="Tutor" value="#{estudiantesController.estudiantes.fechaNacimiento}" /> 
-                <b:inputText  label="Direccion" placeholder="Direccion" value="#{estudiantesController.estudiantes.direccion}" /> 
-                <b:inputText  label="Telefono" placeholder="Telefono" value="#{estudiantesController.estudiantes.telefono}" /> 
-                <b:inputText  label="Representante" placeholder="Representante" value="#{estudiantesController.estudiantes.representante}" /> 
-                <b:inputText  label="Observaciones" placeholder="Observaciones" value="#{estudiantesController.estudiantes.observaciones}" /> 
-                <f:facet name="footer">
-                    <b:button value="Close" dismiss="modal" />
-                    <b:commandButton look="success" value="Editar" action="#{estudiantesController.update()}"   update="messageEdit frmTable frmEdit" oncomplete="$('.modalPseudoClassEdit').modal('hide');return false;"/>
-                    <b:growl id="messageEdit"/>
-                </f:facet>
-            </b:modal>
+            <ui:define name="top">
+                
+            </ui:define>
 
-        </b:form>
-    </h:body>
+            <ui:define name="content">
+                <b:row>
+
+                    <b:column style="text-align: center;width: 100%;" span="3">
+                        <b:button style="margin: 2em" value="Nuevo" look="success" onclick="$('.modalPseudoClass').modal()" size="lg"/>
+                    </b:column>
+                </b:row>
+                <b:form id="frmTable">
+                    <b:dataTable value="#{estudiantesController.lst}"
+                                 var="car">
+                        <b:dataTableColumn order="desc" value="#{car.id}" />
+                        <b:dataTableColumn value="#{car.numero}" />
+                        <b:dataTableColumn value="#{car.cedula}" />
+                        <b:dataTableColumn value="#{car.nombres}"  />
+                        <b:dataTableColumn value="#{car.fechaNacimiento}"  />
+                        <b:dataTableColumn value="#{car.direccion}"  />
+                        <b:dataTableColumn value="#{car.telefono}"  />
+                        <b:dataTableColumn value="#{car.representante}"  />
+                        <b:dataTableColumn   >
+                            <f:facet name="header">
+                                Acciones
+                            </f:facet>
+                            <b:commandButton style="margin-right: 1em" look="info" value="Ver" action="#{estudiantesController.ver(car)}"  update="frmTable"/>
+                            <b:commandButton  style="margin-right: 1em" look="danger" value="Eliminar" action="#{estudiantesController.eliminar(car)}"  update="frmTable"/>
+                            <b:commandButton  style="margin-right: 1em" look="success" value="Editar" action="#{estudiantesController.showEditar(car)}"   update="frmEdit" oncomplete="$('.modalPseudoClassEdit').modal()"/>
+
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                </b:form>
+                <b:form id="frmAdd">
+                    <b:modal id="amodal" title="Nuevo Estudiante" styleClass="modalPseudoClass">
+                        <b:inputText required="true" label="Numero" placeholder="Numero" value="#{estudiantesController.estudiantes.numero}" />
+                        <b:inputText  label="Cedula" placeholder="Decula" value="#{estudiantesController.estudiantes.cedula}" />
+                        <b:inputText required="true" label="Nombres" placeholder="Nombres" value="#{estudiantesController.estudiantes.nombres}" /> 
+                        <b:inputText  type="date" label="Fecha Nacimiento" placeholder="Tutor" value="#{estudiantesController.estudiantes.fechaNacimiento}" /> 
+                        <b:inputText  label="Direccion" placeholder="Direccion" value="#{estudiantesController.estudiantes.direccion}" /> 
+                        <b:inputText  label="Telefono" placeholder="Telefono" value="#{estudiantesController.estudiantes.telefono}" /> 
+                        <b:inputText  label="Representante" placeholder="Representante" value="#{estudiantesController.estudiantes.representante}" /> 
+                        <b:inputText  label="Observaciones" placeholder="Observaciones" value="#{estudiantesController.estudiantes.observaciones}" /> 
+                        <f:facet name="footer">
+                            <b:button value="Close" dismiss="modal" />
+                            <b:commandButton look="success" value="Guardar" action="#{estudiantesController.insert()}"  update="message frmTable"/>
+                            <b:growl id="message"/>
+                        </f:facet>
+                    </b:modal>
+
+                </b:form>
+
+                <b:form id="frmEdit">
+                    <b:modal id="amodal" title="Editar Estudiante" styleClass="modalPseudoClassEdit">
+                        <b:inputText required="true" label="Numero" placeholder="Nombre" value="#{estudiantesController.estudiantes.numero}" />
+                        <b:inputText  label="Cedula" placeholder="Descripcion" value="#{estudiantesController.estudiantes.cedula}" />
+                        <b:inputText required="true"  label="Nombres" placeholder="Tutor" value="#{estudiantesController.estudiantes.nombres}" /> 
+                        <b:inputText  type="date" label="Fecha Nacimiento" placeholder="Tutor" value="#{estudiantesController.estudiantes.fechaNacimiento}" /> 
+                        <b:inputText  label="Direccion" placeholder="Direccion" value="#{estudiantesController.estudiantes.direccion}" /> 
+                        <b:inputText  label="Telefono" placeholder="Telefono" value="#{estudiantesController.estudiantes.telefono}" /> 
+                        <b:inputText  label="Representante" placeholder="Representante" value="#{estudiantesController.estudiantes.representante}" /> 
+                        <b:inputText  label="Observaciones" placeholder="Observaciones" value="#{estudiantesController.estudiantes.observaciones}" /> 
+                        <f:facet name="footer">
+                            <b:button value="Close" dismiss="modal" />
+                            <b:commandButton look="success" value="Editar" action="#{estudiantesController.update()}"   update="messageEdit frmTable frmEdit" oncomplete="$('.modalPseudoClassEdit').modal('hide');return false;"/>
+                            <b:growl id="messageEdit"/>
+                        </f:facet>
+                    </b:modal>
+
+                </b:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
 </html>
-
