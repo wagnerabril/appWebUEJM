@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <b:row>
+            <b:column style="text-align: center;width: 100%;" span="3">
+                <b:button style="margin: 2em" value="Nuevo" look="success" onclick="$('.modalPseudoClass').modal()" size="lg"/>
+            </b:column>
+        </b:row>
+        <b:form id="frmTable">
+            <b:dataTable value="#{cursoController.lst}"
+                         var="car">
+                <b:dataTableColumn order="desc" value="#{car.id}" />
+                <b:dataTableColumn value="#{car.nombre}" />
+                <b:dataTableColumn value="#{car.descripcion}" />
+                <b:dataTableColumn value="#{car.tutor}"  />
+                <b:dataTableColumn   >
+                    <f:facet name="header">
+                        Acciones
+                    </f:facet>
+                    <b:commandButton style="margin-right: 1em" look="info" value="Ver" action="#{cursoController.ver(car)}"  update="frmTable"/>
+                    <b:commandButton  style="margin-right: 1em" look="danger" value="Eliminar" action="#{cursoController.eliminar(car)}"  update="frmTable"/>
+                    <b:commandButton  style="margin-right: 1em" look="success" value="Editar" action="#{cursoController.showEditar(car)}"   update="frmEdit" oncomplete="$('.modalPseudoClassEdit').modal()"/>
+
+                </b:dataTableColumn>
+            </b:dataTable>
+        </b:form>
+        <b:form id="frmAdd">
+            <b:modal id="amodal" title="Nuevo Curso" styleClass="modalPseudoClass">
+                <b:inputText required="true" label="Nombre" placeholder="Nombre" value="#{cursoController.curso.nombre}" />
+                <b:inputText  label="Descripcion" placeholder="Descripcion" value="#{cursoController.curso.descripcion}" />
+                <b:inputText  label="Tutor" placeholder="Tutor" value="#{cursoController.curso.tutor}" /> 
+                <f:facet name="footer">
+                    <b:button value="Close" dismiss="modal" />
+                    <b:commandButton look="success" value="Guardar" action="#{cursoController.insert()}"  update="message frmTable"/>
+                    <b:growl id="message"/>
+                </f:facet>
+            </b:modal>
+
+        </b:form>
+        
+         <b:form id="frmEdit">
+            <b:modal id="amodal" title="Editar Curso" styleClass="modalPseudoClassEdit">
+                <b:inputText required="true" label="Nombre" placeholder="Nombre" value="#{cursoController.curso.nombre}" />
+                <b:inputText  label="Descripcion" placeholder="Descripcion" value="#{cursoController.curso.descripcion}" />
+                <b:inputText  label="Tutor" placeholder="Tutor" value="#{cursoController.curso.tutor}" /> 
+                <f:facet name="footer">
+                    <b:button value="Close" dismiss="modal" />
+                    <b:commandButton look="success" value="Editar" action="#{cursoController.update()}"   update="messageEdit frmTable frmEdit" oncomplete="$('.modalPseudoClassEdit').modal('hide');return false;"/>
+                    <b:growl id="messageEdit"/>
+                </f:facet>
+            </b:modal>
+
+        </b:form>
+    </h:body>
+</html>
+
