@@ -72,7 +72,7 @@ public class CursoController {
     
       public void ver(Curso item) throws Exception {
       
-        FacesContext.getCurrentInstance().getExternalContext().redirect("Estudiantes.xhtml?id="+item.getId());
+        FacesContext.getCurrentInstance().getExternalContext().redirect("faces/Estudiantes.xhtml?id="+item.getId());
       
     }
 
